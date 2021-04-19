@@ -33,7 +33,7 @@
   link.forEach(e => navitems += e + '');
   AddOn.forEach(e => navitems += e + '');
   navitems += '<li class="divider" />'
-  navitems += '<li> ' + version + '</li>'
+  navitems += '<li> Version:' + version + '</li>'
 
   var navshow = navstart + '' + navitems + '' + navend;
   $("#main_navbar #navbar-main-collapse .navbar-right #news_li").after(navshow);
