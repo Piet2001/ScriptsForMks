@@ -1,15 +1,16 @@
 // ==UserScript==
 // @name         Menu-Uitbreiding
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      2021.04.20.00.00
 // @description  try to take over the world!
 // @author       Piet2001
 // @match        https://www.meldkamerspel.com/
 // @grant        none
 // ==/UserScript==
 
-(function() {
-    'use strict';
+(function () {
+  'use strict';
+  var version = "2021.04.20.00.00"
   // basic
   var navstart = '<li id="Piet2001" class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span><span class="caret"></span></a><ul class="dropdown-menu">';
   var navend = '</ul></li>';
@@ -24,11 +25,15 @@
   // AddOn's
   AddOn[0] = '<li id="AddOn1" />'
   AddOn[1] = '<li id="AddOn2" />'
+  AddOn[2] = '<li id="AddOn3" />'
 
 
   // Generate menu
-  link.forEach(e => navitems+= e + '');
+  link.forEach(e => navitems += e + '');
   AddOn.forEach(e => navitems += e + '');
-  var navshow = navstart+''+navitems+''+navend;
-  $( "#main_navbar #navbar-main-collapse .navbar-right #news_li" ).after(navshow);
+  navitems += '<li class="divider" />'
+  navitems += '<li> ' + version + '</li>'
+
+  var navshow = navstart + '' + navitems + '' + navend;
+  $("#main_navbar #navbar-main-collapse .navbar-right #news_li").after(navshow);
 })();
