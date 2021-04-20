@@ -5,7 +5,7 @@
 // @description  try to take over the world!
 // @author       Piet2001
 // @match        https://www.meldkamerspel.com/
-// @updateUrl    https://github.com/Piet2001/ScriptsForMks/raw/master/Menu-Uitbreiding.user.js
+// @updateUrl    https://github.com/Piet2001/ScriptsForMks/raw/dev/Menu-Uitbreiding.user.js
 // @grant        none
 // ==/UserScript==
 
