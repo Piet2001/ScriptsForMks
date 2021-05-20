@@ -1,10 +1,11 @@
 // ==UserScript==
 // @name         Menu-Uitbreiding
 // @namespace    http://tampermonkey.net/
-// @version      2021.04.20.10.15
+// @version      2021.05.20.22.39
 // @description  try to take over the world!
 // @author       Piet2001
 // @match        https://www.meldkamerspel.com/
+// @match        https://politie.meldkamerspel.com/
 // @updateUrl    https://github.com/Piet2001/ScriptsForMks/raw/master/Menu-Uitbreiding.user.js
 // @grant        none
 // ==/UserScript==
