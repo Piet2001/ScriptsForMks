@@ -62,23 +62,23 @@
                 else if(einsatz_titel[i].innerText.match('Arrestanten getransporteerd'))
                 {
                     let anzahl = anzahl_pro_einsatz[i].innerHTML;
-                    sum_gefangene = sum_gefangene + Number(anzahl.replace(" x",""));
+                    sum_gefangene = sum_gefangene + Number(anzahl.replace(" x","").replace(/[,.]/g, '').replace(/\D/g, ''));
                 }
                 else if(einsatz_titel[i].innerText.match('Teamopname'))
                 {
                     let anzahl = anzahl_pro_einsatz[i].innerHTML;
-                    sum_verbande = sum_verbande + Number(anzahl.replace(" x",""));
+                    sum_verbande = sum_verbande + Number(anzahl.replace(" x","").replace(/[,.]/g, '').replace(/\D/g, ''));
                 }
                 else if (einsatz_titel[i].innerText.match('\\[Team\\]'))
                 {
                     let anzahl = anzahl_pro_einsatz[i].innerHTML;
-                    sum_verband = sum_verband + Number(anzahl.replace(" x", ""));
+                    sum_verband = sum_verband + Number(anzahl.replace(" x", "").replace(/[,.]/g, '').replace(/\D/g, ''));
                 }
                 //Alles andere sind normale Einsätze und können gezählt werden
                 else
                 {
                     let anzahl = anzahl_pro_einsatz[i].innerHTML;
-                    sum_einsaetze = sum_einsaetze + Number(anzahl.replace(" x",""));
+                    sum_einsaetze = sum_einsaetze + Number(anzahl.replace(" x","").replace(/[,.]/g, '').replace(/\D/g, ''));
                 }
             }
             for (let i = 0; i < credit_pro_einsatz.length; i++) {
