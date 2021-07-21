@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SumDaily local
 // @namespace    http://tampermonkey.net/
-// @version      1.2
+// @version      1.2.1
 // @description  Daily sum of mission totals
 // @author       Piet2001 | LSSM
 // @match        https://www.meldkamerspel.com/credits/daily*
@@ -121,18 +121,18 @@
             if(typeof table !== 'undefined' && table !== null)
                 table.insertAdjacentHTML('beforebegin',
                     '<div class="label label-danger" id="num_label"><i class="glyphicon glyphicon-fire" id="num_icon"></i>'+
-                    'Aantal / Credits meldingen' + '<span id="num_anzahl">' + sum_einsaetze + ' / ' + cre_einsaetze.toLocaleString() +'</span></div>'+
+                    'Aantal / Credits meldingen' + '<span id="num_anzahl">' + sum_einsaetze.toLocaleString() + ' / ' + cre_einsaetze.toLocaleString() +'</span></div>'+
 
                     '<div class="label label-warning" id="num_label"><i class="glyphicon glyphicon-plus" id="num_icon"></i>'+
-                    'Aantal / Credits patiënten' + '<span id="num_anzahl">' + sum_patienten + ' / ' + cre_patienten.toLocaleString() +'</span></div>'+
+                    'Aantal / Credits patiënten' + '<span id="num_anzahl">' + sum_patienten.toLocaleString() + ' / ' + cre_patienten.toLocaleString() +'</span></div>'+
 
                     '<div class="label label-success" id="num_label"><i class="glyphicon glyphicon-plus" id="num_icon"></i>'+
-                    'Aantal / Credits gevangenen' + '<span id="num_anzahl">' + sum_gefangene + ' / ' + cre_gefangene.toLocaleString() +'</span></div>'+
+                    'Aantal / Credits gevangenen' + '<span id="num_anzahl">' + sum_gefangene.toLocaleString() + ' / ' + cre_gefangene.toLocaleString() +'</span></div>'+
 
                     '<div class="label label-danger" id="num_label"><i class="glyphicon glyphicon-fire" id="num_icon"></i>' +
-                    'Aantal / Credits Teammeldingen' + '<span id="num_anzahl">' + sum_verband + ' / ' + cre_verband.toLocaleString()+'</span></div>' +
+                    'Aantal / Credits Teammeldingen' + '<span id="num_anzahl">' + sum_verband.toLocaleString() + ' / ' + cre_verband.toLocaleString()+'</span></div>' +
 
                     '<div class="label label-info" id="num_label"><i class="glyphicon glyphicon-plus" id="num_icon"></i>'+
-                    'Aantal / Credits Teamopnames' + '<span id="num_anzahl">' + sum_verbande + ' / ' + cre_verbande.toLocaleString() +'</span></div><br><br>');
+                    'Aantal / Credits Teamopnames' + '<span id="num_anzahl">' + sum_verbande.toLocaleString() + ' / ' + cre_verbande.toLocaleString() +'</span></div><br><br>');
         }
 })();
