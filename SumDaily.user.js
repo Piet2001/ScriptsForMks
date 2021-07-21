@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SumDaily local
 // @namespace    http://tampermonkey.net/
-// @version      1.1
+// @version      1.2
 // @description  Daily sum of mission totals
 // @author       Piet2001 | LSSM
 // @match        https://www.meldkamerspel.com/credits/daily*
@@ -46,7 +46,7 @@
                     einsatz_titel[i].innerText.match('Patiënten behandeling en transport'))
                 {
                     let anzahl = anzahl_pro_einsatz[i].innerHTML;
-                    sum_patienten = sum_patienten + Number(anzahl.replace(" x",""));
+                    sum_patienten = sum_patienten + Number(anzahl.replace(" x","").replace(/[,.]/g, '').replace(/\D/g, ''));
                 }
                 //Zähle Ausbauten, abgebrochene Einsätze, Verbandseinlieferungen und Ausbildung nicht dazu
                 else if(einsatz_titel[i].innerText.match('uitgebreid') ||
