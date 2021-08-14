@@ -35,6 +35,7 @@
                 .replace(/\?.*$/, '')
                 .match(/\d*$/)[0];
 
+            if (requirements[parseInt(missionID)] == undefined) await getRequirements();
             let mission = requirements[parseInt(missionID)];
 
             if (mission.requirements.elw3 > 0) {
