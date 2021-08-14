@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SAP_MJR
 // @namespace    http://tampermonkey.net/
-// @version      2021.08.14.11.26
+// @version      2021.08.14.11.29
 // @description  try to take over the world!
 // @author       Piet2001 & LSS-Manager
 // @match        https://www.meldkamerspel.com/missions/*
@@ -15,8 +15,8 @@
     let alliance_chat_credits_setting = true; // Alleen in chat plaatsen als boven ingesteld aantal credits. Deze instelling overschrijft de vorige instelling.
     let alliance_chat_credits = 3000; // aantal credits wanneer die in de chat moet worden geplaatst
 
-    let planned_chat_setting = false; // Instelling of geplande inzetten standaard in de chat komen
-    let planned_alliance_chat_credits_setting = true; // Alleen in chat plaatsen als boven ingesteld aantal credits. Deze instelling overschrijft de vorige instelling.
+    let planned_chat_setting = true; // Instelling of geplande inzetten standaard in de chat komen
+    let planned_alliance_chat_credits_setting = false; // Alleen in chat plaatsen als boven ingesteld aantal credits. Deze instelling overschrijft de vorige instelling.
     let planned_alliance_chat_credits = 5000; // aantal credits wanneer geplande inzetten in de chat moet worden geplaatst
 
     const getFillTime = () => {
@@ -261,10 +261,7 @@
             }
         };
 
-        let messagesplanned = ["Geplande inzet: Alles aanrijdend | %CREDITS% Credits"]
-        //let messages = ["%CREDITS% Credits | Afvullen 21:00"]
-        //let messages = ["%CREDITS% Credits | Direct afvullen"]
-        //let messages = ["%CREDITS% Credits | Direct afgevuld"]
+        let messagesplanned = ["Geplande inzet: %CREDITS% Credits"]
         let messages = ["%CREDITS% Credits | Afvullen vanaf " + getFillTime() + " | Sluitvoertuig " + getSluitvoertuig()]
 
         transformMessages(() => {
