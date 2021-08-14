@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SAP_MJR
 // @namespace    http://tampermonkey.net/
-// @version      2021.08.14.11.35
+// @version      2021.08.14.23.00
 // @description  try to take over the world!
 // @author       Piet2001 & LSS-Manager
 // @match        https://www.meldkamerspel.com/missions/*
@@ -22,40 +22,54 @@
     const getFillTime = () => {
         let time = new Date();
         let hours = time.getHours() + 2;
+        if (hours > 23) {
+            hours -= 24
+        }
         let mins = (time.getMinutes() < 10 ? '0' : '') + time.getMinutes();
 
         return `${hours}:${mins}`
     }
 
     const getSluitvoertuig = () => {
-        const missionHelp = $('#mission_help');
-        const missionlink = missionHelp.attr('href');
-        if (missionHelp && missionlink) {
-            const missionID = missionlink
-                .replace(/\?.*$/, '')
-                .match(/\d*$/)[0];
+        try {
+            const missionHelp = $('#mission_help');
+            const missionlink = missionHelp.attr('href');
+            if (missionHelp && missionlink) {
+                const missionID = missionlink
+                    .replace(/\?.*$/, '')
+                    .match(/\d*$/)[0];
 
-            if (requirements[parseInt(missionID)] == undefined) await getRequirements();
-            let mission = requirements[parseInt(missionID)];
+                let mission = requirements[parseInt(missionID)];
 
-            if (mission.requirements.elw3 > 0) {
-                return "CO"
+                if (mission.requirements.elw3 > 0) {
+                    return "CO"
+                }
+                else if (mission.requirements.mobile_command_vehicles > 0) {
+                    return "HOD"
+                }
+                else if (mission.requirements.battalion_chief_vehicles > 0) {
+                    return "OVD-B"
+                }
+                else if (mission.requirements.spokesman > 0) {
+                    return "VL"
+                }
+                else if (mission.requirements.police_helicopters > 0) {
+                    return "ZULU"
+                }
+                else if (mission.requirements.ovdp > 0) {
+                    return "OVD-P"
+                }
+                else if (mission.requirements.mobile_air_vehicles > 0) {
+                    return "AB"
+                }
+                else {
+                    return "Onbekend, meld aan vrijgever"
+                }
+                callback();
             }
-            else if (mission.requirements.mobile_command_vehicles > 0) {
-                return "HOD"
-            }
-            else if (mission.requirements.battalion_chief_vehicles > 0) {
-                return "OVD"
-            }
-            else if (mission.requirements.ovdp > 0) {
-                return "OVD-P"
-            }
-            else if (mission.requirements.mobile_air_vehicles > 0) {
-                return "AB"
-            }
-            else {
-                return "Onbekend, meld aan vrijgever"
-            }
+        }
+        catch {
+            return "Geen data"
         }
     }
 
@@ -166,14 +180,7 @@
                 test = false;
                 const missionSharel = $('#mission_alliance_share_btn').attr('href');
                 if (missionSharel) {
-
-                    var tag = document.getElementById("AMBU");
-                    if (tag.style.background === "green") {
-                        processAllianceShare();
-                    }
-                    if (tag.style.background === "red") {
-                        test = true
-                    }
+                    processAllianceShare();
                 }
             }
         }
@@ -263,7 +270,7 @@
         };
 
         let messagesplanned = ["Geplande inzet: %CREDITS% Credits"]
-        let messages = ["%CREDITS% Credits | Afvullen vanaf " + getFillTime() + " | Sluitvoertuig " + getSluitvoertuig()]
+        let messages = ["%CREDITS% Credits | Afvullen vanaf " + getFillTime() + " | Sluitvoertuig: " + getSluitvoertuig()]
 
         transformMessages(() => {
             initButtons();
