@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SAP_MJR
 // @namespace    http://tampermonkey.net/
-// @version      2021.08.14.23.00
+// @version      2021.08.14.23.24
 // @description  try to take over the world!
 // @author       Piet2001 & LSS-Manager
 // @match        https://www.meldkamerspel.com/missions/*
@@ -41,25 +41,25 @@
 
                 let mission = requirements[parseInt(missionID)];
 
-                if (mission.requirements.elw3 > 0) {
+                if (mission.requirements.elw3 > 0 && typeof (mission.chances.elw3) == "undefined") {
                     return "CO"
                 }
-                else if (mission.requirements.mobile_command_vehicles > 0) {
+                else if (mission.requirements.mobile_command_vehicles > 0 && typeof (mission.chances.mobile_command_vehicles) == "undefined") {
                     return "HOD"
                 }
-                else if (mission.requirements.battalion_chief_vehicles > 0) {
+                else if (mission.requirements.battalion_chief_vehicles > 0 && typeof (mission.chances.battalion_chief_vehicles) == "undefined") {
                     return "OVD-B"
                 }
-                else if (mission.requirements.spokesman > 0) {
+                else if (mission.requirements.spokesman > 0 && typeof (mission.chances.spokesman) == "undefined") {
                     return "VL"
                 }
-                else if (mission.requirements.police_helicopters > 0) {
+                else if (mission.requirements.police_helicopters > 0 && typeof (mission.chances.police_helicopters) == "undefined") {
                     return "ZULU"
                 }
-                else if (mission.requirements.ovdp > 0) {
+                else if (mission.requirements.ovdp > 0 && typeof (mission.chances.ovdp) == "undefined") {
                     return "OVD-P"
                 }
-                else if (mission.requirements.mobile_air_vehicles > 0) {
+                else if (mission.requirements.mobile_air_vehicles > 0 && typeof (mission.chances.mobile_air_vehicles) == "undefined") {
                     return "AB"
                 }
                 else {
