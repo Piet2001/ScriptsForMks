@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SAP_MJR
 // @namespace    http://tampermonkey.net/
-// @version      2021.08.16.22.07
+// @version      2021.08.16.22.12
 // @description  try to take over the world!
 // @author       Piet2001 & LSS-Manager
 // @match        https://www.meldkamerspel.com/missions/*
@@ -56,6 +56,18 @@
                 else if (mission.requirements.police_helicopters > 0 && typeof (mission.chances.police_helicopters) == "undefined") {
                     return "ZULU"
                 }
+                else if (mission.requirements.hondengeleider > 0 && typeof (mission.chances.hondengeleider) == "undefined") {
+                    return "HGL"
+                }
+                else if (mission.requirements.detention_unit > 0 && typeof (mission.chances.detention_unit) == "undefined") {
+                    return "ME-AE"
+                }
+                else if (mission.requirements.at_c > 0 && typeof (mission.chances.at_c) == "undefined") {
+                    return "AT-C"
+                }
+                else if (mission.requirements.lebefkw > 0 && typeof (mission.chances.lebefkw) == "undefined") {
+                    return "ME-C"
+                }
                 else if (mission.requirements.ovdp > 0 && typeof (mission.chances.ovdp) == "undefined") {
                     return "OVD-P"
                 }
@@ -65,7 +77,6 @@
                 else {
                     return "Onbekend, meld aan vrijgever"
                 }
-                callback();
             }
         }
         catch {
