@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SAP_MJR
 // @namespace    http://tampermonkey.net/
-// @version      2021.08.14.23.24
+// @version      2021.08.16.22.07
 // @description  try to take over the world!
 // @author       Piet2001 & LSS-Manager
 // @match        https://www.meldkamerspel.com/missions/*
@@ -202,7 +202,7 @@
             $.ajax({
                 url: `/missions/${missionId}/alliance`,
                 headers: {
-                    'X-LSS-Manager': "3.3.7"
+                    'MJR': "1",
                 },
                 success() {
                     $('.alert_notify_alliance').html('Chat...');
@@ -210,7 +210,7 @@
                         type: 'POST',
                         url: `/mission_replies`,
                         headers: {
-                            'X-LSS-Manager': "3.3.7",
+                            'MJR': "1",
                         },
                         data: {
                             authenticity_token: csrfToken,
