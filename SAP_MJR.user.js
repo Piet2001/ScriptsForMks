@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SAP_MJR
 // @namespace    http://tampermonkey.net/
-// @version      2021.08.16.22.12
+// @version      2021.08.31.14.56
 // @description  try to take over the world!
 // @author       Piet2001 & LSS-Manager
 // @match        https://www.meldkamerspel.com/missions/*
@@ -13,7 +13,7 @@
     var requirements = localStorage.MKS_requirements === undefined ? {} : JSON.parse(localStorage.MKS_requirements)
     let alliance_chat_setting = false; // Standaard instelling wel/niet in chat posten
     let alliance_chat_credits_setting = true; // Alleen in chat plaatsen als boven ingesteld aantal credits. Deze instelling overschrijft de vorige instelling.
-    let alliance_chat_credits = 3000; // aantal credits wanneer die in de chat moet worden geplaatst
+    let alliance_chat_credits = 5000; // aantal credits wanneer die in de chat moet worden geplaatst
 
     let planned_chat_setting = true; // Instelling of geplande inzetten standaard in de chat komen
     let planned_alliance_chat_credits_setting = false; // Alleen in chat plaatsen als boven ingesteld aantal credits. Deze instelling overschrijft de vorige instelling.
