@@ -1,10 +1,11 @@
 // ==UserScript==
 // @name         SumDaily local
 // @namespace    http://tampermonkey.net/
-// @version      2021.08.14.11.26
+// @version      2021.09.11
 // @description  Daily sum of mission totals
 // @author       Piet2001 | LSS-Manager
 // @match        https://www.meldkamerspel.com/credits/daily*
+// @match        https://politie.meldkamerspel.com/credits/daily*
 // @grant        none
 // ==/UserScript==
 
