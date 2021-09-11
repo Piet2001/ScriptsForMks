@@ -1,10 +1,11 @@
 // ==UserScript==
 // @name         SAP_MJR
 // @namespace    http://tampermonkey.net/
-// @version      2021.08.31.14.56
+// @version      2021.09.11
 // @description  try to take over the world!
 // @author       Piet2001 & LSS-Manager
 // @match        https://www.meldkamerspel.com/missions/*
+// @match        https://politie.meldkamerspel.com/missions/*
 // @grant        none
 // ==/UserScript==
 
