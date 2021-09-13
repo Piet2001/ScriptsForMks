@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SAP_MJR
 // @namespace    http://tampermonkey.net/
-// @version      2021.09.11
+// @version      2021.09.13
 // @description  try to take over the world!
 // @author       Piet2001 & LSS-Manager
 // @match        https://www.meldkamerspel.com/missions/*
@@ -12,8 +12,8 @@
 (async function () {
     'use strict';
     var requirements = localStorage.MKS_requirements === undefined ? {} : JSON.parse(localStorage.MKS_requirements)
-    let alliance_chat_setting = false; // Standaard instelling wel/niet in chat posten
-    let alliance_chat_credits_setting = true; // Alleen in chat plaatsen als boven ingesteld aantal credits. Deze instelling overschrijft de vorige instelling.
+    let alliance_chat_setting = true; // Standaard instelling wel/niet in chat posten
+    let alliance_chat_credits_setting = false; // Alleen in chat plaatsen als boven ingesteld aantal credits. Deze instelling overschrijft de vorige instelling.
     let alliance_chat_credits = 5000; // aantal credits wanneer die in de chat moet worden geplaatst
 
     let planned_chat_setting = true; // Instelling of geplande inzetten standaard in de chat komen
@@ -176,16 +176,16 @@
         const shortcutKeys = 82;
         var test = true;
 
-        $(document).keydown(e => {
-            if (!($("input").is(":focus"))) {
-                switch (e.keyCode) {
-                    case shortcutKeys:
-                        AlliancePressed()
-                        break;
-                }
-                return e.returnValue;
-            }
-        });
+//         $(document).keydown(e => {
+//             if (!($("input").is(":focus"))) {
+//                 switch (e.keyCode) {
+//                     case shortcutKeys:
+//                         AlliancePressed()
+//                         break;
+//                 }
+//                 return e.returnValue;
+//             }
+//         });
 
         const AlliancePressed = () => {
             if (test) {
