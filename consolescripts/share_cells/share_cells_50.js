@@ -11,7 +11,7 @@ procesOpenCosts();
 
 async function procesOpenCosts() {
     let ID = open.length !== 0 ? open[0] : costs.length !== 0 ? costs[0] : 0
-    console.log(open.length)
+    console.log(open.length + costs.length)
     if (ID === 0) return;
     else if (open.length !== 0) {
         await fetch(`/buildings/${ID}/alliance`).then(() => {

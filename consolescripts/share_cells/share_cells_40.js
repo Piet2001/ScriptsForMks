@@ -4,11 +4,14 @@ let open = [];
 let costs = [];
 buildings.forEach(b => {
     if (!b.is_alliance_shared) open.push(b.id)
-    if (!b.is_alliance_shared || b.alliance_share_credits_percentage !== 20) costs.push(b.id)
+    if (!b.is_alliance_shared || b.alliance_share_credits_percentage !== 40) costs.push(b.id)
 })
+
+procesOpenCosts()
+
 async function procesOpenCosts() {
     let ID = open.length !== 0 ? open[0] : costs.length !== 0 ? costs[0] : 0
-    console.log(open.length)
+    console.log(open.length + costs.length)
     if (ID === 0) return;
     else if (open.length !== 0) {
         await fetch(`/buildings/${ID}/alliance`).then(() => {
@@ -17,10 +20,9 @@ async function procesOpenCosts() {
         })
     }
     else {
-        await fetch(`/buildings/${ID}/alliance_costs/2`).then(() => {
+        await fetch(`/buildings/${ID}/alliance_costs/4`).then(() => {
             costs.splice(0, 1)
             procesOpenCosts();
         })
     }
 }
-procesOpenCosts()
