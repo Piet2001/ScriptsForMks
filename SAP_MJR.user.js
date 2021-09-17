@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SAP_MJR
 // @namespace    http://tampermonkey.net/
-// @version      2021.09.13
+// @version      2021.09.17
 // @description  try to take over the world!
 // @author       Piet2001 & LSS-Manager
 // @match        https://www.meldkamerspel.com/missions/*
@@ -11,6 +11,10 @@
 
 (async function () {
     'use strict';
+    let alliance_credits = 5000;
+    let ignore_min_credits_to_share = false;
+    let possible_to_share = false;
+    
     var requirements = localStorage.MKS_requirements === undefined ? {} : JSON.parse(localStorage.MKS_requirements)
     let alliance_chat_setting = true; // Standaard instelling wel/niet in chat posten
     let alliance_chat_credits_setting = false; // Alleen in chat plaatsen als boven ingesteld aantal credits. Deze instelling overschrijft de vorige instelling.
@@ -188,7 +192,7 @@
 //         });
 
         const AlliancePressed = () => {
-            if (test) {
+            if (test && possible_to_share) {
                 test = false;
                 const missionSharel = $('#mission_alliance_share_btn').attr('href');
                 if (missionSharel) {
@@ -263,7 +267,7 @@
                         });
                         alliance_chat_setting = planned_chat_setting ? true : false;
                         planned_alliance_chat_credits_setting ? alliance_chat_setting = parseInt(credits) >= planned_alliance_chat_credits ? true : false : '';
-
+                        possible_to_share = true;
 
                     }
                     else {
@@ -273,6 +277,9 @@
                             return message;
                         });
                         alliance_chat_credits_setting ? alliance_chat_setting = parseInt(credits) >= alliance_chat_credits ? true : false : '';
+                        if (credits >= alliance_credits || ignore_min_credits_to_share) {
+                            possible_to_share = true 
+                        }
                     }
                     callback();
                 };
