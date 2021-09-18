@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SAP_MJR
 // @namespace    http://tampermonkey.net/
-// @version      2021.09.18
+// @version      2021.09.19
 // @description  try to take over the world!
 // @author       Piet2001 & LSS-Manager
 // @match        https://www.meldkamerspel.com/missions/*
@@ -100,6 +100,7 @@
                         data.forEach((mission) => { requirements[mission.id] = mission })
                         localStorage.MKS_requirements = JSON.stringify(requirements);
                         resolve(data)
+                        localStorage.setItem('SAP_MJR', JSON.stringify({ lastUpdate: new Date().getTime() }));
                     },
                     error: function (xhr, textStatus, errorThrown) {
                         setTimeout(async function () {
@@ -259,7 +260,7 @@
                         .replace(/\?.*$/, '')
                         .match(/\d*$/)[0];
 
-                    if (requirements[parseInt(missionID)] == undefined) await getRequirements();
+                    if (requirements[parseInt(missionID)] == undefined || !localStorage.SAP_MJR || JSON.parse(localStorage.SAP_MJR).lastUpdate < (new Date().getTime() - 5 * 1000 * 60)) await getRequirements();
                     let credits = 0;
                     let mission = requirements[parseInt(missionID)];
                     if (mission.additional.guard_mission) {
