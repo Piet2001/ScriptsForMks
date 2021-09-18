@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SAP_MJR
 // @namespace    http://tampermonkey.net/
-// @version      2021.09.17
+// @version      2021.09.18
 // @description  try to take over the world!
 // @author       Piet2001 & LSS-Manager
 // @match        https://www.meldkamerspel.com/missions/*
@@ -198,6 +198,9 @@
                 if (missionSharel) {
                     processAllianceShare();
                 }
+            }
+            else {
+                alert("Deze inzet is onder de deelgrens. Gebruik de normale deelknop om alsnog te delen!")
             }
         }
 
