@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SAP_MJR
 // @namespace    http://tampermonkey.net/
-// @version      2021.09.19
+// @version      2021.10.18
 // @description  try to take over the world!
 // @author       Piet2001 & LSS-Manager
 // @match        https://www.meldkamerspel.com/missions/*
@@ -14,19 +14,20 @@
     let alliance_credits = 5000;
     let ignore_min_credits_to_share = false;
     let possible_to_share = false;
+    let minOpenTime = 2
     
     var requirements = localStorage.MKS_requirements === undefined ? {} : JSON.parse(localStorage.MKS_requirements)
-    let alliance_chat_setting = true; // Standaard instelling wel/niet in chat posten
+    let alliance_chat_setting = false; // Standaard instelling wel/niet in chat posten
     let alliance_chat_credits_setting = false; // Alleen in chat plaatsen als boven ingesteld aantal credits. Deze instelling overschrijft de vorige instelling.
     let alliance_chat_credits = 5000; // aantal credits wanneer die in de chat moet worden geplaatst
 
-    let planned_chat_setting = true; // Instelling of geplande inzetten standaard in de chat komen
+    let planned_chat_setting = false; // Instelling of geplande inzetten standaard in de chat komen
     let planned_alliance_chat_credits_setting = false; // Alleen in chat plaatsen als boven ingesteld aantal credits. Deze instelling overschrijft de vorige instelling.
     let planned_alliance_chat_credits = 5000; // aantal credits wanneer geplande inzetten in de chat moet worden geplaatst
 
     const getFillTime = () => {
         let time = new Date();
-        let hours = time.getHours() + 2;
+        let hours = time.getHours() + minOpenTime;
         if (hours > 23) {
             hours -= 24
         }
@@ -53,7 +54,7 @@
                     return "HOD"
                 }
                 else if (mission.requirements.battalion_chief_vehicles > 0 && typeof (mission.chances.battalion_chief_vehicles) == "undefined") {
-                    return "OVD-B"
+                    return "OVD-B/HOD"
                 }
                 else if (mission.requirements.spokesman > 0 && typeof (mission.chances.spokesman) == "undefined") {
                     return "VL"
@@ -78,6 +79,9 @@
                 }
                 else if (mission.requirements.mobile_air_vehicles > 0 && typeof (mission.chances.mobile_air_vehicles) == "undefined") {
                     return "AB"
+                }
+                else if (mission.requirements.water_rescue > 0 && typeof (mission.chances.water_rescue) == "undefined") {	
+                    return "Strandvoertuig"	
                 }
                 else {
                     return "Onbekend, meld aan vrijgever"
