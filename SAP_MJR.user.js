@@ -11,6 +11,16 @@
 
 (async function () {
     'use strict';
+    var versie = "2021.10.23"
+    if (!localStorage.SAP_MRJ_VERSION || JSON.parse(localStorage.SAP_MRJ_VERSION).Version == versie) {
+        var updates = "- Fix voor missie variaties\n-bericht bij update"
+
+        alert(`SAP_MRJ - Versie ${versie} nieuwe update! \n\n Updates:\n${updates} `)
+
+        localStorage.setItem('SAP_MRJ_VERSION', JSON.stringify({ Version: versie }));
+    }
+
+
     let alliance_credits = 5000;
     let ignore_min_credits_to_share = false;
     let possible_to_share = false;
