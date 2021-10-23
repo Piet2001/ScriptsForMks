@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SAP_MJR
 // @namespace    http://tampermonkey.net/
-// @version      2021.10.18
+// @version      2021.10.23
 // @description  try to take over the world!
 // @author       Piet2001 & LSS-Manager
 // @match        https://www.meldkamerspel.com/missions/*
@@ -15,7 +15,7 @@
     let ignore_min_credits_to_share = false;
     let possible_to_share = false;
     let minOpenTime = 2
-    
+
     var requirements = localStorage.MKS_requirements === undefined ? {} : JSON.parse(localStorage.MKS_requirements)
     let alliance_chat_setting = false; // Standaard instelling wel/niet in chat posten
     let alliance_chat_credits_setting = false; // Alleen in chat plaatsen als boven ingesteld aantal credits. Deze instelling overschrijft de vorige instelling.
@@ -41,11 +41,13 @@
             const missionHelp = $('#mission_help');
             const missionlink = missionHelp.attr('href');
             if (missionHelp && missionlink) {
-                const missionID = missionlink
-                    .replace(/\?.*$/, '')
-                    .match(/\d*$/)[0];
+                let missionID = $('#mission_help').attr('href').split("/").pop().replace(/\?.*/, '');
+                const overlay = new URLSearchParams($('#mission_help').attr('href').split("/").pop()).get('overlay_index')
+                if (overlay !== null) {
+                    missionID = `${missionID}-${overlay}`
+                }
 
-                let mission = requirements[parseInt(missionID)];
+                let mission = requirements[missionID];
 
                 if (mission.requirements.elw3 > 0 && typeof (mission.chances.elw3) == "undefined") {
                     return "CO"
@@ -80,8 +82,11 @@
                 else if (mission.requirements.mobile_air_vehicles > 0 && typeof (mission.chances.mobile_air_vehicles) == "undefined") {
                     return "AB"
                 }
-                else if (mission.requirements.water_rescue > 0 && typeof (mission.chances.water_rescue) == "undefined") {	
-                    return "Strandvoertuig"	
+                else if (mission.requirements.water_rescue > 0 && typeof (mission.chances.water_rescue) == "undefined") {
+                    return "Strandvoertuig"
+                }
+                else if (mission.requirements.foam > 0 && typeof (mission.chances.foam) == "undefined") {
+                    return "SB"
                 }
                 else {
                     return "Onbekend, meld aan vrijgever"
@@ -185,16 +190,16 @@
         const shortcutKeys = 82;
         var test = true;
 
-//         $(document).keydown(e => {
-//             if (!($("input").is(":focus"))) {
-//                 switch (e.keyCode) {
-//                     case shortcutKeys:
-//                         AlliancePressed()
-//                         break;
-//                 }
-//                 return e.returnValue;
-//             }
-//         });
+        //         $(document).keydown(e => {
+        //             if (!($("input").is(":focus"))) {
+        //                 switch (e.keyCode) {
+        //                     case shortcutKeys:
+        //                         AlliancePressed()
+        //                         break;
+        //                 }
+        //                 return e.returnValue;
+        //             }
+        //         });
 
         const AlliancePressed = () => {
             if (test && possible_to_share) {
@@ -260,13 +265,15 @@
                 const missionHelp = $('#mission_help');
                 const missionlink = missionHelp.attr('href');
                 if (missionHelp && missionlink) {
-                    const missionID = missionlink
-                        .replace(/\?.*$/, '')
-                        .match(/\d*$/)[0];
+                    let missionID = $('#mission_help').attr('href').split("/").pop().replace(/\?.*/, '');
+                    const overlay = new URLSearchParams($('#mission_help').attr('href').split("/").pop()).get('overlay_index')
+                    if (overlay !== null) {
+                        missionID = `${missionID}-${overlay}`
+                    }
 
-                    if (requirements[parseInt(missionID)] == undefined || !localStorage.SAP_MJR || JSON.parse(localStorage.SAP_MJR).lastUpdate < (new Date().getTime() - 5 * 1000 * 60)) await getRequirements();
+                    if (requirements[missionID] == undefined || !localStorage.SAP_MJR || JSON.parse(localStorage.SAP_MJR).lastUpdate < (new Date().getTime() - 5 * 1000 * 60)) await getRequirements();
                     let credits = 0;
-                    let mission = requirements[parseInt(missionID)];
+                    let mission = requirements[missionID];
                     if (mission.additional.guard_mission) {
                         credits = parseInt($('#col_left').text().split('Verdiensten: ')[1].split(` ${I18n.translations.nl_NL.javascript.credits}`)[0].split('.').join('')) ?? 0;
                         messages = messagesplanned.map(message => {
@@ -286,7 +293,7 @@
                         });
                         alliance_chat_credits_setting ? alliance_chat_setting = parseInt(credits) >= alliance_chat_credits ? true : false : '';
                         if (credits >= alliance_credits || ignore_min_credits_to_share) {
-                            possible_to_share = true 
+                            possible_to_share = true
                         }
                     }
                     callback();
