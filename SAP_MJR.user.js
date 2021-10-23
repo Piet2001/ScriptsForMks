@@ -13,7 +13,7 @@
     'use strict';
     var versie = "2021.10.23.2"
     if (!localStorage.SAP_MJR_VERSION || JSON.parse(localStorage.SAP_MJR_VERSION).Version !== versie) {
-        var updates = "- Fix voor missie variaties\n-bericht bij update"
+        var updates = "- Fix voor missie variaties\n- Bericht bij update"
 
         alert(`SAP_MRJ - Versie ${versie} nieuwe update! \n\n Updates:\n${updates}`)
 
