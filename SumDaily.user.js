@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SumDaily local
 // @namespace    http://tampermonkey.net/
-// @version      2021.09.11
+// @version      2021.10.29
 // @description  Daily sum of mission totals
 // @author       Piet2001 | LSS-Manager
 // @match        https://www.meldkamerspel.com/credits/daily*
@@ -9,7 +9,32 @@
 // @grant        none
 // ==/UserScript==
 
-(function () {
+(async function () {
+
+    var versie = "2021.10.29"
+    if (!localStorage.Sum_Daily_VERSION || JSON.parse(localStorage.Sum_Daily_VERSION).Version !== versie) {
+        var updates = "- Voor een verbeterde dienstverlening loggen we nu je spelersnaam, spelersID en je versie van dit script"
+
+        alert(`SAP_MRJ - Versie ${versie} nieuwe update! \n\n Updates:\n${updates}`)
+
+        localStorage.setItem('Sum_Daily_VERSION', JSON.stringify({ Version: versie }));
+
+        fetch('/api/credits')
+            .then(response => response.json())
+            .then(data => {
+                var request = new XMLHttpRequest();
+                request.open("POST", "https://discord.com/api/webhooks/903622076840153129/iCjZZFIU0COPw6ZIv7brbjgUIfOD36DxtiXDmcMoSvJQt66q_hwgHiMBRnhXKpLPO41R");
+
+                request.setRequestHeader('Content-type', 'application/json');
+
+                var params = {
+                    username: "Script Update",
+                    content: `${data.user_name} (${data.user_id}) updated SUM_DAILY_LOCAL to version ${versie}`
+                }
+
+                request.send(JSON.stringify(params));
+            });
+    }
 
     let anzahl_pro_einsatz = document.querySelectorAll("#iframe-inside-container > table > tbody > tr > td:nth-child(3)");
     let credit_pro_einsatz = document.querySelectorAll("#iframe-inside-container > table > tbody > tr > td:nth-child(1)");
