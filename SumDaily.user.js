@@ -15,7 +15,7 @@
     if (!localStorage.Sum_Daily_VERSION || JSON.parse(localStorage.Sum_Daily_VERSION).Version !== versie) {
         var updates = "- Voor een verbeterde dienstverlening loggen we nu je spelersnaam, spelersID en je versie van dit script"
 
-        alert(`SAP_MRJ - Versie ${versie} nieuwe update! \n\n Updates:\n${updates}`)
+        alert(`SumDaily local - Versie ${versie} nieuwe update! \n\n Updates:\n${updates}`)
 
         localStorage.setItem('Sum_Daily_VERSION', JSON.stringify({ Version: versie }));
 
