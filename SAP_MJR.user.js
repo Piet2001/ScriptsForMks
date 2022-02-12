@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SAP_MJR
 // @namespace    http://tampermonkey.net/
-// @version      2022.02.12
+// @version      2022.02.12.1
 // @description  try to take over the world!
 // @author       Piet2001 & LSS-Manager
 // @match        https://www.meldkamerspel.com/missions/*
@@ -11,7 +11,7 @@
 
 (async function () {
     'use strict';
-    var versie = "2022.02.12"
+    var versie = "2022.02.12.1"
     if (!localStorage.SAP_MJR_VERSION || JSON.parse(localStorage.SAP_MJR_VERSION).Version !== versie) {
         var updates = "- Alleen leden kunnen dit script gebruiken"
 
@@ -23,7 +23,7 @@
             .then(response => response.json())
             .then(data => {
                 var request = new XMLHttpRequest();
-                request.open("POST", "https://discord.com/api/webhooks/903622076840153129/iCjZZFIU0COPw6ZIv7brbjgUIfOD36DxtiXDmcMoSvJQt66q_hwgHiMBRnhXKpLPO41R");
+                request.open("POST", "https://discord.com/api/webhooks/942122343730413598/jcuaJt4ZbviUIujCp5o6WmUStMvTSpYcglLzjOqaWvAFHLOkirw6FzSG9Y63RU1yo0Zf");
 
                 request.setRequestHeader('Content-type', 'application/json');
 
