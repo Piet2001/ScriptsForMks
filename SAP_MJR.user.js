@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SAP_MJR
 // @namespace    http://tampermonkey.net/
-// @version      2021.10.29
+// @version      2022.02.12
 // @description  try to take over the world!
 // @author       Piet2001 & LSS-Manager
 // @match        https://www.meldkamerspel.com/missions/*
@@ -11,9 +11,9 @@
 
 (async function () {
     'use strict';
-    var versie = "2021.10.29"
+    var versie = "2022.02.12"
     if (!localStorage.SAP_MJR_VERSION || JSON.parse(localStorage.SAP_MJR_VERSION).Version !== versie) {
-        var updates = "- Voor een verbeterde dienstverlening loggen we nu je spelersnaam, spelersID en je versie van dit script"
+        var updates = "- Alleen leden kunnen dit script gebruiken"
 
         alert(`SAP_MRJ - Versie ${versie} nieuwe update! \n\n Updates:\n${updates}`)
 
@@ -35,7 +35,24 @@
                 request.send(JSON.stringify(params));
             });
     }
+    if (!localStorage.SAP_MJR || JSON.parse(localStorage.SAP_MJR).lastUpdate < (new Date().getTime() - 5 * 1000 * 60)) {
+        fetch('/api/allianceinfo')
+            .then(response => response.json())
+            .then(data => {
+                if (data.id === 3637) {
+                    RunScript()
+                }
+                else {
+                    alert("U zit niet in het juiste team om gebruik te maken van dit script")
+                }
+            });
+    }
+    else {
+        RunScript()
+    }
+})();
 
+function RunScript() {
 
     let alliance_credits = 5000;
     let ignore_min_credits_to_share = false;
@@ -336,4 +353,4 @@
             initButtons();
         });
     }
-})();
+}
