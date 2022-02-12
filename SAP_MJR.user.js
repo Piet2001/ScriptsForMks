@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SAP_MJR
 // @namespace    http://tampermonkey.net/
-// @version      2022.02.12.1
+// @version      2022.02.12.2
 // @description  try to take over the world!
 // @author       Piet2001 & LSS-Manager
 // @match        https://www.meldkamerspel.com/missions/*
@@ -11,7 +11,7 @@
 
 (async function () {
     'use strict';
-    var versie = "2022.02.12.1"
+    var versie = "2022.02.12.2"
     if (!localStorage.SAP_MJR_VERSION || JSON.parse(localStorage.SAP_MJR_VERSION).Version !== versie) {
         var updates = "- Alleen leden kunnen dit script gebruiken"
 
@@ -39,7 +39,7 @@
         fetch('/api/allianceinfo')
             .then(response => response.json())
             .then(data => {
-                if (data.id === 3637) {
+                if (data.id === 528) {
                     RunScript()
                 }
                 else {
