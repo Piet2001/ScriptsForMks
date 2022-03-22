@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SAP_MKCP - meldkamer Costa Pama
 // @namespace    http://tampermonkey.net/
-// @version      2022.02.12.2
+// @version      2022.03.22
 // @description  try to take over the world!
 // @author       Piet2001 & LSS-Manager
 // @match        https://www.meldkamerspel.com/missions/*
@@ -11,7 +11,7 @@
 
 (async function () {
     'use strict';
-    var versie = "2022.02.12.2"
+    var versie = "2022.03.22"
     if (!localStorage.SAP_MKCP_VERSION || JSON.parse(localStorage.SAP_MKCP_VERSION).Version !== versie) {
         var updates = "- Voor een verbeterde dienstverlening loggen we nu je spelersnaam, spelersID en je versie van dit script"
 
@@ -54,10 +54,10 @@
 
 function RunScript() {
 
-    let alliance_credits = 5000;
+    let alliance_credits = 4000;
     let ignore_min_credits_to_share = false;
     let possible_to_share = false;
-    let minOpenTime = 6
+    let minOpenTime = 4
 
     var requirements = localStorage.MKS_requirements === undefined ? {} : JSON.parse(localStorage.MKS_requirements)
     let alliance_chat_setting = false; // Standaard instelling wel/niet in chat posten
