@@ -1,4 +1,4 @@
-let buildings = await $.getJSON('/api/buildings', { _: new Date().getTime() })
+let buildings = await $.getJSON('/api/alliance_buildings', { _: new Date().getTime() })
 buildings = buildings.filter(b => b.building_type === 2)
 let extensions = {};
 let number = 0;
