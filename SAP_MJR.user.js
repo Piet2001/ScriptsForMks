@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SAP_MJR
 // @namespace    http://tampermonkey.net/
-// @version      2022.02.12.2
+// @version      2023.02.25
 // @description  try to take over the world!
 // @author       Piet2001 & LSS-Manager
 // @match        https://www.meldkamerspel.com/missions/*
@@ -11,9 +11,9 @@
 
 (async function () {
     'use strict';
-    var versie = "2022.02.12.2"
+    var versie = "2023.02.25"
     if (!localStorage.SAP_MJR_VERSION || JSON.parse(localStorage.SAP_MJR_VERSION).Version !== versie) {
-        var updates = "- Alleen leden kunnen dit script gebruiken"
+        var updates = "- Omdat mensen graag de OVD-P mee willen sturen is deze verwijderd uit mogelijk sluitvoertuig. Let op: Leden die dit script niet gebruiken kunnen het voertuig nog steeds kiezen als sluitvoertuig."
 
         alert(`SAP_MRJ - Versie ${versie} nieuwe update! \n\n Updates:\n${updates}`)
 
@@ -118,9 +118,6 @@ function RunScript() {
                 }
                 else if (mission.requirements.lebefkw > 0 && typeof (mission.chances.lebefkw) == "undefined") {
                     return "ME-C"
-                }
-                else if (mission.requirements.ovdp > 0 && typeof (mission.chances.ovdp) == "undefined") {
-                    return "OVD-P"
                 }
                 else if (mission.requirements.mobile_air_vehicles > 0 && typeof (mission.chances.mobile_air_vehicles) == "undefined") {
                     return "AB"
