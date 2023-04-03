@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SAP_MJR
 // @namespace    http://tampermonkey.net/
-// @version      2023.02.25
+// @version      2023.04.03
 // @description  try to take over the world!
 // @author       Piet2001 & LSS-Manager
 // @match        https://www.meldkamerspel.com/missions/*
@@ -11,9 +11,9 @@
 
 (async function () {
     'use strict';
-    var versie = "2023.02.25"
+    var versie = "2023.04.03"
     if (!localStorage.SAP_MJR_VERSION || JSON.parse(localStorage.SAP_MJR_VERSION).Version !== versie) {
-        var updates = "- Omdat mensen graag de OVD-P mee willen sturen is deze verwijderd uit mogelijk sluitvoertuig. Let op: Leden die dit script niet gebruiken kunnen het voertuig nog steeds kiezen als sluitvoertuig."
+        var updates = "Voor extra duidelijkheid hebben we een '~' toegevoegd voor het aantal credits bij normale meldingen, omdat dit niet het exacte aantal is. "
 
         alert(`SAP_MRJ - Versie ${versie} nieuwe update! \n\n Updates:\n${updates}`)
 
@@ -344,7 +344,7 @@ function RunScript() {
         };
 
         let messagesplanned = ["Geplande inzet: %CREDITS% Credits"]
-        let messages = ["%CREDITS% Credits | Afvullen vanaf " + getFillTime() + " | Sluitvoertuig: " + getSluitvoertuig()]
+        let messages = ["~%CREDITS% Credits | Afvullen vanaf " + getFillTime() + " | Sluitvoertuig: " + getSluitvoertuig()]
 
         transformMessages(() => {
             initButtons();
