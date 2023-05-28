@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SAP_MJR
 // @namespace    http://tampermonkey.net/
-// @version      2023.04.03
+// @version      2023.05.28
 // @description  try to take over the world!
 // @author       Piet2001 & LSS-Manager
 // @match        https://www.meldkamerspel.com/missions/*
@@ -11,9 +11,9 @@
 
 (async function () {
     'use strict';
-    var versie = "2023.04.03"
+    var versie = "2023.05.28"
     if (!localStorage.SAP_MJR_VERSION || JSON.parse(localStorage.SAP_MJR_VERSION).Version !== versie) {
-        var updates = "Voor extra duidelijkheid hebben we een '~' toegevoegd voor het aantal credits bij normale meldingen, omdat dit niet het exacte aantal is. "
+        var updates = "Geplande inzetten worden niet meer in de chat gedeeld "
 
         alert(`SAP_MRJ - Versie ${versie} nieuwe update! \n\n Updates:\n${updates}`)
 
@@ -65,7 +65,7 @@ function RunScript() {
     let alliance_chat_credits = 5000; // aantal credits wanneer die in de chat moet worden geplaatst
 
     let planned_chat_setting = false; // Instelling of geplande inzetten standaard in de chat komen
-    let planned_alliance_chat_credits_setting = true; // Alleen in chat plaatsen als boven ingesteld aantal credits. Deze instelling overschrijft de vorige instelling.
+    let planned_alliance_chat_credits_setting = false; // Alleen in chat plaatsen als boven ingesteld aantal credits. Deze instelling overschrijft de vorige instelling.
     let planned_alliance_chat_credits = 10000; // aantal credits wanneer geplande inzetten in de chat moet worden geplaatst
 
     const getFillTime = () => {
