@@ -1,19 +1,55 @@
 // ==UserScript==
 // @name         SAP_MJR
 // @namespace    http://tampermonkey.net/
-// @version      2023.05.28
+// @version      2023.06.20
 // @description  try to take over the world!
 // @author       Piet2001 & LSS-Manager
-// @match        https://www.meldkamerspel.com/missions/*
-// @match        https://politie.meldkamerspel.com/missions/*
+// @match        https://www.meldkamerspel.com/*
+// @match        https://politie.meldkamerspel.com/*
 // @grant        none
 // ==/UserScript==
 
+var runPage = false;
+
 (async function () {
     'use strict';
-    var versie = "2023.05.28"
+
+    setlocalstorageitems()
+    setnavitems()
+
+    function setlocalstorageitems() {
+        if (!localStorage.SAP_MJR_Shortcut) {
+            localStorage.setItem("SAP_MJR_Shortcut", 'off');
+        }
+    }
+
+    function setnavitems() {
+        var navSAP_MJR_Shortcut = '<a role="presentation" href="#" id="setSAP_MJR_Shortcut" data-SAP_MJR_Shortcut="' + localStorage.getItem('SAP_MJR_Shortcut') + '" >SAP_MJR Sneltoets (R): <strong><span id="showSAP_MJR_Shortcut">' + (localStorage.getItem('SAP_MJR_Shortcut') == 'on' ? 'Aan' : 'Uit') + '</span></strong></a>';
+        $("ul .dropdown-menu[aria-labelledby='menu_alliance'] >> a[href='/freunde']").parent().after(navSAP_MJR_Shortcut);
+    }
+
+    $("#setSAP_MJR_Shortcut").click(function () {
+        if (localStorage.getItem('SAP_MJR_Shortcut') == 'on') {
+            localStorage.setItem("SAP_MJR_Shortcut", 'off');
+        } else {
+            localStorage.setItem("SAP_MJR_Shortcut", 'on');
+        }
+        $("#showSAP_MJR_Shortcut").html((localStorage.getItem('SAP_MJR_Shortcut') == 'on' ? 'Aan' : 'Uit'));
+    });
+
+    function checkurl() {
+        var url = window.location.pathname.split("/");
+        $.each(url, function (index, value) {
+            if (value == 'missions') {
+                runPage = true;
+            }
+        });
+        return runPage;
+    }
+
+    var versie = "2023.06.20"
     if (!localStorage.SAP_MJR_VERSION || JSON.parse(localStorage.SAP_MJR_VERSION).Version !== versie) {
-        var updates = "Geplande inzetten worden niet meer in de chat gedeeld "
+        var updates = "Je kunt nu de sneltoets R gebruiken voor het script, nadat je deze hebt ingeschakeld"
 
         alert(`SAP_MRJ - Versie ${versie} nieuwe update! \n\n Updates:\n${updates}`)
 
@@ -48,7 +84,9 @@
             });
     }
     else {
-        RunScript()
+        if (checkurl()) {
+            RunScript()
+        }
     }
 })();
 
@@ -230,16 +268,18 @@ function RunScript() {
         const shortcutKeys = 82;
         var test = true;
 
-        //         $(document).keydown(e => {
-        //             if (!($("input").is(":focus"))) {
-        //                 switch (e.keyCode) {
-        //                     case shortcutKeys:
-        //                         AlliancePressed()
-        //                         break;
-        //                 }
-        //                 return e.returnValue;
-        //             }
-        //         });
+        $(document).keydown(e => {
+            if (!($("input").is(":focus"))) {
+                if (localStorage.getItem('SAP_MJR_Shortcut') === 'on') {
+                    switch (e.keyCode) {
+                        case shortcutKeys:
+                            AlliancePressed()
+                            break;
+                    }
+                    return e.returnValue;
+                }
+            }
+        });
 
         const AlliancePressed = () => {
             if (test && possible_to_share) {
