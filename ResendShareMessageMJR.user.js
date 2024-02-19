@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         resendShareMessageMJR
 // @namespace    http://tampermonkey.net/
-// @version      2024.02.18
+// @version      2024.02.19
 // @description  try to take over the world!
 // @author       Piet2001 & LSS-Manager
 // @match        https://www.meldkamerspel.com/*
@@ -24,11 +24,11 @@ var runPage = false;
         return runPage;
     }
 
-    var versie = "2024.02.18"
+    var versie = "2024.02.19"
     if (!localStorage.resendShareMessageMJR_VERSION || JSON.parse(localStorage.resendShareMessageMJR_VERSION).Version !== versie) {
-        var updates = "Dit script geeft je de mogelijkheid om een deelbericht na te sturen.\nDaarbij wordt nu ook de SAR-Heli verkozen"
+        var updates = "Mogelijke sluitvoertuigen gelijkgetrokken aan SAP_MJR"
 
-        alert(`SAP_MRJ - Versie ${versie} nieuwe update! \n\n Updates:\n${updates}`)
+        alert(`ResentShareMessageMJR - Versie ${versie} nieuwe update! \n\n Updates:\n${updates}`)
 
         localStorage.setItem('resendShareMessageMJR_VERSION', JSON.stringify({ Version: versie }));
     }
@@ -122,14 +122,8 @@ function RunScript() {
                 else if (mission.requirements.mobile_air_vehicles > 0 && typeof (mission.chances.mobile_air_vehicles) == "undefined") {
                     return "AB"
                 }
-                else if (mission.requirements.coastal_helicopter > 0 && typeof (mission.chances.coastal_helicopter) == "undefined") {
-                    return "SAR-Heli"
-                }
-                else if (mission.requirements.water_rescue > 0 && typeof (mission.chances.water_rescue) == "undefined") {
-                    return "Strandvoertuig/PM-OR"
-                }
-                else if (mission.requirements.foam > 0 && typeof (mission.chances.foam) == "undefined") {
-                    return "SB"
+                else if (mission.requirements.boats > 0 && typeof (mission.chances.boats) == "undefined") {
+                    return "WOA/BA-RB"
                 }
                 else {
                     return "Onbekend, meld aan vrijgever"

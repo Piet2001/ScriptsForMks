@@ -32,9 +32,7 @@ Het script genereerd de juiste tekst incl. sluitvoertuig op basis van de volgend
 - AT-C
 - ME-C
 - AB
-- SAR-Heli
-- Strandvoertuig/PM-OR
-- SB
+- WOA/BA-RB
 ```
 
 ### SAP_MKCP
