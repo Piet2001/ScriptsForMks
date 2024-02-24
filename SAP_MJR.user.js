@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SAP_MJR
 // @namespace    http://tampermonkey.net/
-// @version      2024.02.19
+// @version      2024.02.24
 // @description  try to take over the world!
 // @author       Piet2001 & LSS-Manager
 // @match        https://www.meldkamerspel.com/*
@@ -47,9 +47,9 @@ var runPage = false;
         return runPage;
     }
 
-    var versie = "2024.02.19"
+    var versie = "2024.02.24"
     if (!localStorage.SAP_MJR_VERSION || JSON.parse(localStorage.SAP_MJR_VERSION).Version !== versie) {
-        var updates = "Update aan mogelijke sluitvoertuigen"
+        var updates = "Strandvoertuig is weer een sluitvoertuig"
 
         alert(`SAP_MRJ - Versie ${versie} nieuwe update! \n\n Updates:\n${updates}`)
 
@@ -162,6 +162,9 @@ function RunScript() {
                 }
                 else if (mission.requirements.boats > 0 && typeof (mission.chances.boats) == "undefined") {
                     return "WOA/BA-RB"
+                }
+                else if (mission.requirements.water_rescue > 0 && typeof (mission.chances.water_rescue) == "undefined") {
+                    return "Strandvoetuig/PM-OR"
                 }
                 else {
                     return "Onbekend, meld aan vrijgever"
