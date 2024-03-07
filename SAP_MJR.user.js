@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SAP_MJR
 // @namespace    http://tampermonkey.net/
-// @version      2024.02.24
+// @version      2024.03.07
 // @description  try to take over the world!
 // @author       Piet2001 & LSS-Manager
 // @match        https://www.meldkamerspel.com/*
@@ -47,9 +47,9 @@ var runPage = false;
         return runPage;
     }
 
-    var versie = "2024.02.24"
+    var versie = "2024.03.07"
     if (!localStorage.SAP_MJR_VERSION || JSON.parse(localStorage.SAP_MJR_VERSION).Version !== versie) {
-        var updates = "Strandvoertuig is weer een sluitvoertuig"
+        var updates = "Spoed aanpassing i.v.m. niet meer functioneren"
 
         alert(`SAP_MRJ - Versie ${versie} nieuwe update! \n\n Updates:\n${updates}`)
 
@@ -146,7 +146,7 @@ function RunScript() {
                     return "ZULU"
                 }
                 else if (mission.requirements.hondengeleider > 0 && typeof (mission.chances.hondengeleider) == "undefined") {
-                    return "HGL"
+                    return "HGL/Hondengeleider"
                 }
                 else if (mission.requirements.detention_unit > 0 && typeof (mission.chances.detention_unit) == "undefined") {
                     return "ME-AE"
@@ -309,7 +309,7 @@ function RunScript() {
 
             $('.alert_notify_alliance').html('Delen...');
             $.ajax({
-                url: `/missions/${missionId}/alliance`,
+                url: missionShareLink,
                 headers: {
                     'MJR': "1",
                 },
