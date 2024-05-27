@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         resendShareMessageMJR
 // @namespace    http://tampermonkey.net/
-// @version      2024.02.24
+// @version      2024.05.27
 // @description  try to take over the world!
 // @author       Piet2001 & LSS-Manager
 // @match        https://www.meldkamerspel.com/*
@@ -24,9 +24,9 @@ var runPage = false;
         return runPage;
     }
 
-    var versie = "2024.02.24"
+    var versie = "2024.05.27"
     if (!localStorage.resendShareMessageMJR_VERSION || JSON.parse(localStorage.resendShareMessageMJR_VERSION).Version !== versie) {
-        var updates = "Mogelijke sluitvoertuigen gelijkgetrokken aan SAP_MJR"
+        var updates = "Suppport voor uitgeschakelde meldingen"
 
         alert(`ResentShareMessageMJR - Versie ${versie} nieuwe update! \n\n Updates:\n${updates}`)
 
@@ -143,7 +143,7 @@ function RunScript() {
             return new Promise(resolve => {
 
                 $.ajax({
-                    url: "/einsaetze.json",
+                    url: "https://raw.githubusercontent.com/Piet2001/Inzetten/main/complete.json",
                     method: "GET",
                     success: function (data, textStatus) {
                         data.forEach((mission) => { requirements[mission.id] = mission })

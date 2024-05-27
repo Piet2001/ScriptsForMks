@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SAP_MJR
 // @namespace    http://tampermonkey.net/
-// @version      2024.03.07
+// @version      2024.05.27
 // @description  try to take over the world!
 // @author       Piet2001 & LSS-Manager
 // @match        https://www.meldkamerspel.com/*
@@ -47,9 +47,9 @@ var runPage = false;
         return runPage;
     }
 
-    var versie = "2024.03.07"
+    var versie = "2024.05.27"
     if (!localStorage.SAP_MJR_VERSION || JSON.parse(localStorage.SAP_MJR_VERSION).Version !== versie) {
-        var updates = "Spoed aanpassing i.v.m. niet meer functioneren"
+        var updates = "Suppport voor uitgeschakelde meldingen"
 
         alert(`SAP_MRJ - Versie ${versie} nieuwe update! \n\n Updates:\n${updates}`)
 
@@ -181,7 +181,7 @@ function RunScript() {
             return new Promise(resolve => {
 
                 $.ajax({
-                    url: "/einsaetze.json",
+                    url: "https://raw.githubusercontent.com/Piet2001/Inzetten/main/complete.json",
                     method: "GET",
                     success: function (data, textStatus) {
                         data.forEach((mission) => { requirements[mission.id] = mission })
