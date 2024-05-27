@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SAP_MJR
 // @namespace    http://tampermonkey.net/
-// @version      2024.05.27
+// @version      2024.05.27.1
 // @description  try to take over the world!
 // @author       Piet2001 & LSS-Manager
 // @match        https://www.meldkamerspel.com/*
@@ -47,7 +47,7 @@ var runPage = false;
         return runPage;
     }
 
-    var versie = "2024.05.27"
+    var versie = "2024.05.27.1"
     if (!localStorage.SAP_MJR_VERSION || JSON.parse(localStorage.SAP_MJR_VERSION).Version !== versie) {
         var updates = "Suppport voor uitgeschakelde meldingen"
 
@@ -58,6 +58,7 @@ var runPage = false;
         fetch('/api/credits')
             .then(response => response.json())
             .then(data => {
+                data = JSON.parse(data);
                 var request = new XMLHttpRequest();
                 request.open("POST", "https://discord.com/api/webhooks/942122343730413598/jcuaJt4ZbviUIujCp5o6WmUStMvTSpYcglLzjOqaWvAFHLOkirw6FzSG9Y63RU1yo0Zf");
 

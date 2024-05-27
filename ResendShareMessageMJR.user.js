@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         resendShareMessageMJR
 // @namespace    http://tampermonkey.net/
-// @version      2024.05.27
+// @version      2024.05.27.1
 // @description  try to take over the world!
 // @author       Piet2001 & LSS-Manager
 // @match        https://www.meldkamerspel.com/*
@@ -24,7 +24,7 @@ var runPage = false;
         return runPage;
     }
 
-    var versie = "2024.05.27"
+    var versie = "2024.05.27.1"
     if (!localStorage.resendShareMessageMJR_VERSION || JSON.parse(localStorage.resendShareMessageMJR_VERSION).Version !== versie) {
         var updates = "Suppport voor uitgeschakelde meldingen"
 
@@ -146,6 +146,7 @@ function RunScript() {
                     url: "https://raw.githubusercontent.com/Piet2001/Inzetten/main/complete.json",
                     method: "GET",
                     success: function (data, textStatus) {
+                        data = JSON.parse(data);
                         data.forEach((mission) => { requirements[mission.id] = mission })
                         localStorage.MKS_requirements = JSON.stringify(requirements);
                         resolve(data)

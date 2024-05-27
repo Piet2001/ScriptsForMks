@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SAP_MKCP - meldkamer Costa Pama
 // @namespace    http://tampermonkey.net/
-// @version      2024.05.27
+// @version      2024.05.27.1
 // @description  try to take over the world!
 // @author       Piet2001 & LSS-Manager
 // @match        https://www.meldkamerspel.com/missions/*
@@ -11,7 +11,7 @@
 
 (async function () {
     'use strict';
-    var versie = "2024.05.27"
+    var versie = "2024.05.27.1"
     if (!localStorage.SAP_MKCP_VERSION || JSON.parse(localStorage.SAP_MKCP_VERSION).Version !== versie) {
         var updates = "Suppport voor uitgeschakelde meldingen"
 
@@ -157,6 +157,7 @@ function RunScript() {
                     url: "https://raw.githubusercontent.com/Piet2001/Inzetten/main/complete.json",
                     method: "GET",
                     success: function (data, textStatus) {
+                        data = JSON.parse(data);
                         data.forEach((mission) => { requirements[mission.id] = mission })
                         localStorage.MKS_requirements = JSON.stringify(requirements);
                         resolve(data)
