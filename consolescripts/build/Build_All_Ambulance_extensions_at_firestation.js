@@ -5,7 +5,9 @@ let number = 0;
 buildings.forEach(b => {
     let ext = [`${b.id}_0`];
     b.extensions.forEach(e => {
-        ext.splice(ext.indexOf(`${b.id}_${e.type_id}`), 1)
+        if (ext.indexOf(`${b.id}_${e.type_id}`) != -1) {
+            ext.splice(ext.indexOf(`${b.id}_${e.type_id}`), 1)
+        }
     })
     if (ext.length !== 0) extensions[b.id] = ext;
     number += ext.length;
