@@ -34,6 +34,7 @@ Het script genereerd de juiste tekst incl. sluitvoertuig op basis van de volgend
 - AB
 - WOA/BA-RB
 - Strandvoertuig/PM-OR
+- KW-Boot
 ```
 
 ### SAP_MKCP

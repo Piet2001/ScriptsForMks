@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SAP_MJR
 // @namespace    http://tampermonkey.net/
-// @version      2024.05.28
+// @version      2025.06.18
 // @description  try to take over the world!
 // @author       Piet2001 & LSS-Manager
 // @match        https://www.meldkamerspel.com/*
@@ -47,9 +47,9 @@ var runPage = false;
         return runPage;
     }
 
-    var versie = "2024.05.28"
+    var versie = "2025.06.18"
     if (!localStorage.SAP_MJR_VERSION || JSON.parse(localStorage.SAP_MJR_VERSION).Version !== versie) {
-        var updates = "Suppport voor uitgeschakelde meldingen"
+        var updates = "KW-boot toegevoegd als mogelijk sluitvoertuig"
 
         alert(`SAP_MRJ - Versie ${versie} nieuwe update! \n\n Updates:\n${updates}`)
 
@@ -59,7 +59,7 @@ var runPage = false;
             .then(response => response.json())
             .then(data => {
                 var request = new XMLHttpRequest();
-                request.open("POST", "https://discord.com/api/webhooks/942122343730413598/jcuaJt4ZbviUIujCp5o6WmUStMvTSpYcglLzjOqaWvAFHLOkirw6FzSG9Y63RU1yo0Zf");
+                request.open("POST", "https://discord.com/api/webhooks/1384978318918422609/RSVREOP2MmWdSm0F_C-NWuoQ24co1Y_kKicqtLrl5ijWo4EuPUNRlK_HYXN5Y1nHnDKJ");
 
                 request.setRequestHeader('Content-type', 'application/json');
 
@@ -165,6 +165,9 @@ function RunScript() {
                 }
                 else if (mission.requirements.water_rescue > 0 && typeof (mission.chances.water_rescue) == "undefined") {
                     return "Strandvoetuig/PM-OR"
+                }
+                else if (mission.requirements.coastal_guard_boat > 0 && typeof (mission.chances.coastal_guard_boat) == "undefined") {
+                    return "KW-Boot"
                 }
                 else {
                     return "Onbekend, meld aan vrijgever"
