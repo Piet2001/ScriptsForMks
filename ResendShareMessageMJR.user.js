@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         resendShareMessageMJR
 // @namespace    http://tampermonkey.net/
-// @version      2025.06.19
+// @version      2025.06.19.1
 // @description  try to take over the world!
 // @author       Piet2001 & LSS-Manager
 // @match        https://www.meldkamerspel.com/*
@@ -24,9 +24,9 @@ var runPage = false;
         return runPage;
     }
 
-    var versie = "2025.06.19"
+    var versie = "2025.06.19.1"
     if (!localStorage.resendShareMessageMJR_VERSION || JSON.parse(localStorage.resendShareMessageMJR_VERSION).Version !== versie) {
-        var updates = "Suppport voor uitgeschakelde meldingen"
+        var updates = "KW-Boot toegevoegd als mogelijk sluitvoertuig"
 
         alert(`ResentShareMessageMJR - Versie ${versie} nieuwe update! \n\n Updates:\n${updates}`)
 
@@ -137,6 +137,9 @@ function RunScript() {
                 }
                 else if (mission.requirements.water_rescue > 0 && typeof (mission.chances.water_rescue) == "undefined") {
                     return "Strandvoertuig/PM-OR"
+                }
+                else if (mission.requirements.coastal_guard_boat > 0 && typeof (mission.chances.coastal_guard_boat) == "undefined") {
+                    return "KW-Boot"
                 }
                 else {
                     return "Onbekend, meld aan vrijgever"
