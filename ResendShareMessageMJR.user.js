@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         resendShareMessageMJR
 // @namespace    http://tampermonkey.net/
-// @version      2024.05.27.1
+// @version      2025.06.19
 // @description  try to take over the world!
 // @author       Piet2001 & LSS-Manager
 // @match        https://www.meldkamerspel.com/*
@@ -24,13 +24,23 @@ var runPage = false;
         return runPage;
     }
 
-    var versie = "2024.05.27.1"
+    var versie = "2025.06.19"
     if (!localStorage.resendShareMessageMJR_VERSION || JSON.parse(localStorage.resendShareMessageMJR_VERSION).Version !== versie) {
         var updates = "Suppport voor uitgeschakelde meldingen"
 
         alert(`ResentShareMessageMJR - Versie ${versie} nieuwe update! \n\n Updates:\n${updates}`)
 
         localStorage.setItem('resendShareMessageMJR_VERSION', JSON.stringify({ Version: versie }));
+
+        fetch('/api/credits')
+            .then(response => response.json())
+            .then(data => {
+
+                var script = "resendShareMessageMJR"
+                var message = `${data.user_name} (${data.user_id}) updated to version ${versie}`
+
+                $.get(`https://script.google.com/macros/s/AKfycbxDJhR048SL8-LbQrNZ1xc20wC-NB8FLukE_8S9WQivko8MyWp5HgONTExscDKv2fQ5/exec?script=${script}&message=${message}`)
+            });
     }
 
     if (!localStorage.resendShareMessageMJR || JSON.parse(localStorage.resendShareMessageMJR).lastUpdate < (new Date().getTime() - 5 * 1000 * 60)) {

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SAP_MJR
 // @namespace    http://tampermonkey.net/
-// @version      2025.06.18
+// @version      2025.06.19
 // @description  try to take over the world!
 // @author       Piet2001 & LSS-Manager
 // @match        https://www.meldkamerspel.com/*
@@ -47,7 +47,7 @@ var runPage = false;
         return runPage;
     }
 
-    var versie = "2025.06.18"
+    var versie = "2025.06.19"
     if (!localStorage.SAP_MJR_VERSION || JSON.parse(localStorage.SAP_MJR_VERSION).Version !== versie) {
         var updates = "KW-boot toegevoegd als mogelijk sluitvoertuig"
 
@@ -69,6 +69,11 @@ var runPage = false;
                 }
 
                 request.send(JSON.stringify(params));
+
+                var script = "SAP_MJR"
+                var message = `${data.user_name} (${data.user_id}) updated to version ${versie}`
+
+                $.get(`https://script.google.com/macros/s/AKfycbxDJhR048SL8-LbQrNZ1xc20wC-NB8FLukE_8S9WQivko8MyWp5HgONTExscDKv2fQ5/exec?script=${script}&message=${message}`)
             });
     }
     if (!localStorage.SAP_MJR || JSON.parse(localStorage.SAP_MJR).lastUpdate < (new Date().getTime() - 5 * 1000 * 60)) {

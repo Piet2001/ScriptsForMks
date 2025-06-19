@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SumDaily local
 // @namespace    http://tampermonkey.net/
-// @version      2021.10.29
+// @version      2025.06.19
 // @description  Daily sum of mission totals
 // @author       Piet2001 | LSS-Manager
 // @match        https://www.meldkamerspel.com/credits/daily*
@@ -11,7 +11,7 @@
 
 (async function () {
 
-    var versie = "2021.10.29"
+    var versie = "2025.06.19"
     if (!localStorage.Sum_Daily_VERSION || JSON.parse(localStorage.Sum_Daily_VERSION).Version !== versie) {
         var updates = "- Voor een verbeterde dienstverlening loggen we nu je spelersnaam, spelersID en je versie van dit script"
 
@@ -33,6 +33,11 @@
                 }
 
                 request.send(JSON.stringify(params));
+
+                var script = "SUM_DAILY_LOCAL"
+                var message = `${data.user_name} (${data.user_id}) updated to version ${versie}`
+
+                $.get(`https://script.google.com/macros/s/AKfycbxDJhR048SL8-LbQrNZ1xc20wC-NB8FLukE_8S9WQivko8MyWp5HgONTExscDKv2fQ5/exec?script=${script}&message=${message}`)
             });
     }
 

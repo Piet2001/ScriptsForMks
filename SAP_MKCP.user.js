@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SAP_MKCP - meldkamer Costa Pama
 // @namespace    http://tampermonkey.net/
-// @version      2024.05.27.1
+// @version      2025.06.19
 // @description  try to take over the world!
 // @author       Piet2001 & LSS-Manager
 // @match        https://www.meldkamerspel.com/missions/*
@@ -11,7 +11,7 @@
 
 (async function () {
     'use strict';
-    var versie = "2024.05.27.1"
+    var versie = "2025.06.19"
     if (!localStorage.SAP_MKCP_VERSION || JSON.parse(localStorage.SAP_MKCP_VERSION).Version !== versie) {
         var updates = "Suppport voor uitgeschakelde meldingen"
 
@@ -33,6 +33,12 @@
                 }
 
                 request.send(JSON.stringify(params));
+
+                var script = "SAP_MKCP"
+                var message = `${data.user_name} (${data.user_id}) updated to version ${versie}`
+
+                $.get(`https://script.google.com/macros/s/AKfycbxDJhR048SL8-LbQrNZ1xc20wC-NB8FLukE_8S9WQivko8MyWp5HgONTExscDKv2fQ5/exec?script=${script}&message=${message}`)
+
             });
     }
     if (!localStorage.SAP_MKCP || JSON.parse(localStorage.SAP_MKCP).lastUpdate < (new Date().getTime() - 5 * 1000 * 60)) {
