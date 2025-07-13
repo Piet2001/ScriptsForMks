@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         resendShareMessageMJR
 // @namespace    http://tampermonkey.net/
-// @version      2025.06.19.1
+// @version      2025.07.13
 // @description  try to take over the world!
 // @author       Piet2001 & LSS-Manager
 // @match        https://www.meldkamerspel.com/*
@@ -24,9 +24,9 @@ var runPage = false;
         return runPage;
     }
 
-    var versie = "2025.06.19.1"
+    var versie = "2025.07.13"
     if (!localStorage.resendShareMessageMJR_VERSION || JSON.parse(localStorage.resendShareMessageMJR_VERSION).Version !== versie) {
-        var updates = "KW-Boot toegevoegd als mogelijk sluitvoertuig"
+        var updates = "Additive overlay's worden nu ondersteund"
 
         alert(`ResentShareMessageMJR - Versie ${versie} nieuwe update! \n\n Updates:\n${updates}`)
 
@@ -94,10 +94,14 @@ function RunScript() {
             const missionHelp = $('#mission_help');
             const missionlink = missionHelp.attr('href');
             if (missionHelp && missionlink) {
-                let missionID = $('#mission_help').attr('href').split("/").pop().replace(/\?.*/, '');
-                const overlay = new URLSearchParams($('#mission_help').attr('href').split("/").pop()).get('overlay_index')
+                let missionId = $('#mission_general_info').attr('data-mission-type');
+                const overlay = $('#mission_general_info').attr('data-overlay-index') ?? null;
+                const additive = $('#mission_general_info').attr('data-additive-overlays') ?? null;
                 if (overlay !== null) {
-                    missionID = `${missionID}-${overlay}`
+                    missionId = `${missionId}-${overlay}`
+                }
+                if (additive !== null) {
+                    missionId = `${missionId}/${additive}`
                 }
 
                 let mission = requirements[missionID];
