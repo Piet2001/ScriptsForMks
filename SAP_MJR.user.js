@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SAP_MJR
 // @namespace    http://tampermonkey.net/
-// @version      2025.07.15
+// @version      2025.07.15.1
 // @description  try to take over the world!
 // @author       Piet2001 & LSS-Manager
 // @match        https://www.meldkamerspel.com/*
@@ -47,9 +47,9 @@ var runPage = false;
         return runPage;
     }
 
-    var versie = "2025.07.15"
+    var versie = "2025.07.15.1"
     if (!localStorage.SAP_MJR_VERSION || JSON.parse(localStorage.SAP_MJR_VERSION).Version !== versie) {
-        var updates = "Issue 'Geen data' als sluitvoertuig verholpen"
+        var updates = "Fix issue met additive overlays"
 
         alert(`SAP_MRJ - Versie ${versie} nieuwe update! \n\n Updates:\n${updates}`)
 
@@ -127,17 +127,17 @@ function RunScript() {
             const missionHelp = $('#mission_help');
             const missionlink = missionHelp.attr('href');
             if (missionHelp && missionlink) {
-                let missionId = $('#mission_general_info').attr('data-mission-type');
+                let missionID = $('#mission_general_info').attr('data-mission-type');
                 const overlay = $('#mission_general_info').attr('data-overlay-index') ?? null;
                 const additive = $('#mission_general_info').attr('data-additive-overlays') ?? null;
                 if (overlay !== null) {
-                    missionId = `${missionId}-${overlay}`
+                    missionID = `${missionID}-${overlay}`
                 }
                 if (additive !== null) {
-                    missionId = `${missionId}/${additive}`
+                    missionID = `${missionID}/${additive}`
                 }
 
-                let mission = requirements[missionId];
+                let mission = requirements[missionID];
 
                 if (mission.requirements.elw3 > 0 && typeof (mission.chances.elw3) == "undefined") {
                     return "CO"
@@ -358,10 +358,14 @@ function RunScript() {
                 const missionHelp = $('#mission_help');
                 const missionlink = missionHelp.attr('href');
                 if (missionHelp && missionlink) {
-                    let missionID = $('#mission_help').attr('href').split("/").pop().replace(/\?.*/, '');
-                    const overlay = new URLSearchParams($('#mission_help').attr('href').split("/").pop()).get('overlay_index')
+                    let missionID = $('#mission_general_info').attr('data-mission-type');
+                    const overlay = $('#mission_general_info').attr('data-overlay-index') ?? null;
+                    const additive = $('#mission_general_info').attr('data-additive-overlays') ?? null;
                     if (overlay !== null) {
                         missionID = `${missionID}-${overlay}`
+                    }
+                    if (additive !== null) {
+                        missionID = `${missionID}/${additive}`
                     }
 
                     if (requirements[missionID] == undefined || !localStorage.SAP_MJR || JSON.parse(localStorage.SAP_MJR).lastUpdate < (new Date().getTime() - 5 * 1000 * 60)) await getRequirements();
