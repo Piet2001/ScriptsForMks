@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SAP_MJR
 // @namespace    http://tampermonkey.net/
-// @version      2025.07.13
+// @version      2025.07.15
 // @description  try to take over the world!
 // @author       Piet2001 & LSS-Manager
 // @match        https://www.meldkamerspel.com/*
@@ -47,9 +47,9 @@ var runPage = false;
         return runPage;
     }
 
-    var versie = "2025.07.13"
+    var versie = "2025.07.15"
     if (!localStorage.SAP_MJR_VERSION || JSON.parse(localStorage.SAP_MJR_VERSION).Version !== versie) {
-        var updates = "Additive overlay's worden nu ondersteund"
+        var updates = "Issue 'Geen data' als sluitvoertuig verholpen"
 
         alert(`SAP_MRJ - Versie ${versie} nieuwe update! \n\n Updates:\n${updates}`)
 
@@ -137,7 +137,7 @@ function RunScript() {
                     missionId = `${missionId}/${additive}`
                 }
 
-                let mission = requirements[missionID];
+                let mission = requirements[missionId];
 
                 if (mission.requirements.elw3 > 0 && typeof (mission.chances.elw3) == "undefined") {
                     return "CO"
