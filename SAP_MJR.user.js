@@ -51,7 +51,7 @@ var runPage = false;
     if (!localStorage.SAP_MJR_VERSION || JSON.parse(localStorage.SAP_MJR_VERSION).Version !== versie) {
         var updates = "Fix issue met additive overlays"
 
-        alert(`SAP_MRJ - Versie ${versie} nieuwe update! \n\n Updates:\n${updates}`)
+        alert(`SAP_MJR - Versie ${versie} nieuwe update! \n\n Updates:\n${updates}`)
 
         localStorage.setItem('SAP_MJR_VERSION', JSON.stringify({ Version: versie }));
 
