@@ -22,7 +22,7 @@ async function buystorage_upgrades() {
     let buildingID = b[0];
     const e = storage_upgrades[buildingID];
     let extension = e.indexOf(`${buildingID}_0`) !== -1 ? `${buildingID}_0` : e[0];
-    await $.post(`/buildings/${buildingID}/storage_upgrade/credits/${extension.split('_')[1]}?redirect_building_id=${buildingID}`).then(() => {
+    await $.post(`/buildings/${buildingID}/storage_upgrade/credits/${extension.split('_').slice(1).join('_')}?redirect_building_id=${buildingID}`).then(() => {
         e.splice(e.indexOf(extension), 1)
         if (e.length === 0) {
             delete storage_upgrades[buildingID]
