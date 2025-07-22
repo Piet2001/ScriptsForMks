@@ -1,7 +1,7 @@
 let buildings = await $.getJSON('/api/buildings', { _: new Date().getTime() })
 buildings = buildings.filter(b => b.building_type === 1)
 let uitschakelen = [];
-let ignore_buildings = []; //id's van meldkamers die moeten worden vergeslagen.
+let ignore_buildings = []; //id's van meldkamers die moeten worden overgeslagen.
 buildings.forEach(b => {
     if (b.enabled && !ignore_buildings.includes(b.id)) uitschakelen.push(b.id)
 })
