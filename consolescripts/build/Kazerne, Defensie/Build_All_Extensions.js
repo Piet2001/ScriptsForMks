@@ -3,7 +3,7 @@ buildings = buildings.filter(b => b.building_type === 25)
 let extensions = {};
 let number = 0;
 buildings.forEach(b => {
-    let ext = [`${b.id}_0`, `${b.id}_1``${b.id}_2`];
+    let ext = [`${b.id}_0`, `${b.id}_1`, `${b.id}_2`];
     b.extensions.forEach(e => {
         if (ext.indexOf(`${b.id}_${e.type_id}`) != -1) {
             ext.splice(ext.indexOf(`${b.id}_${e.type_id}`), 1)
