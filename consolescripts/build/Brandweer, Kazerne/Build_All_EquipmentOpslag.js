@@ -3,7 +3,7 @@ buildings = buildings.filter(b => b.building_type === 0)
 let storage_upgrades = {};
 let number = 0;
 buildings.forEach(b => {
-    let ext = [`${b.id}_fire_equipment`, `${b.id}_fire_equipment_2`, `${b.id}_military_police_equipment_3`, `${b.id}_military_police_equipment_4`, `${b.id}_military_police_equipment_5`];
+    let ext = [`${b.id}_fire_equipment`, `${b.id}_fire_equipment_2`, `${b.id}_fire_equipment_3`, `${b.id}_fire_equipment_4`, `${b.id}_fire_equipment_5`];
     b.storage_upgrades.forEach(e => {
         if (ext.indexOf(`${b.id}_${e.type_id}`) != -1) {
             ext.splice(ext.indexOf(`${b.id}_${e.type_id}`), 1)
