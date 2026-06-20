@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Mission Reporter
 // @namespace    http://tampermonkey.net/
-// @version      2026.06.20.1
+// @version      2026.06.20.2
 // @description  try to take over the world!
 // @author       Piet2001 & LSS-Manager
 // @match        https://www.meldkamerspel.com/missions/*
@@ -11,6 +11,34 @@
 
 (async function () {
     'use strict';
+
+    var versie = "2026.06.20.2"
+    if (!localStorage.MissionReporter_version || JSON.parse(localStorage.MissionReporter_version).Version !== versie) {
+        var updates = "- Voor een verbeterde dienstverlening loggen we nu je spelersnaam, spelersID en je versie van dit script"
+
+        localStorage.setItem('MissionReporter_version', JSON.stringify({ Version: versie }));
+
+        fetch('/api/credits')
+            .then(response => response.json())
+            .then(data => {
+                var request = new XMLHttpRequest();
+                request.open("POST", "https://discord.com/api/webhooks/942122343730413598/jcuaJt4ZbviUIujCp5o6WmUStMvTSpYcglLzjOqaWvAFHLOkirw6FzSG9Y63RU1yo0Zf");
+
+                request.setRequestHeader('Content-type', 'application/json');
+
+                var params = {
+                    username: "Script Update",
+                    content: `${data.user_name} (${data.user_id}) updated MissionReporter to version ${versie}`
+                }
+
+                request.send(JSON.stringify(params));
+
+                var script = "MissionReporter"
+                var message = `${data.user_name} (${data.user_id}) updated to version ${versie}`
+
+                $.get(`https://script.google.com/macros/s/AKfycbxDJhR048SL8-LbQrNZ1xc20wC-NB8FLukE_8S9WQivko8MyWp5HgONTExscDKv2fQ5/exec?script=${script}&message=${message}`)
+            });
+    }
 
     const STORAGE_KEY = 'sap_mjr_sent_mission_ids_daily';
 
