@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Mission Reporter
 // @namespace    http://tampermonkey.net/
-// @version      2026.06.20.2
+// @version      2026.06.21
 // @description  try to take over the world!
 // @author       Piet2001 & LSS-Manager
 // @match        https://www.meldkamerspel.com/missions/*
@@ -12,7 +12,7 @@
 (async function () {
     'use strict';
 
-    var versie = "2026.06.20.2"
+    var versie = "2026.06.21"
     if (!localStorage.MissionReporter_version || JSON.parse(localStorage.MissionReporter_version).Version !== versie) {
         var updates = "- Voor een verbeterde dienstverlening loggen we nu je spelersnaam, spelersID en je versie van dit script"
 
@@ -40,7 +40,7 @@
             });
     }
 
-    const STORAGE_KEY = 'sap_mjr_sent_mission_ids_daily';
+    const STORAGE_KEY = 'MissionReporter_sent_mission_ids_daily';
 
     function getLocalDateKey() {
         const now = new Date();
