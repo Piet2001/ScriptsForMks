@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Mission Reporter
 // @namespace    http://tampermonkey.net/
-// @version      2026.06.21
+// @version      2026.06.22
 // @description  try to take over the world!
 // @author       Piet2001 & LSS-Manager
 // @match        https://www.meldkamerspel.com/missions/*
@@ -12,11 +12,43 @@
 (async function () {
     'use strict';
 
-    var versie = "2026.06.21"
-    if (!localStorage.MissionReporter_version || JSON.parse(localStorage.MissionReporter_version).Version !== versie) {
+    var versie = "2026.06.22"
+    function safeGetLocalStorageItem(key) {
+        try {
+            return localStorage.getItem(key);
+        } catch {
+            return null;
+        }
+    }
+
+    function safeSetLocalStorageItem(key, value) {
+        try {
+            localStorage.setItem(key, value);
+            return true;
+        } catch {
+            return false;
+        }
+    }
+
+    function readStoredVersion() {
+        const raw = safeGetLocalStorageItem('MissionReporter_version');
+        if (!raw) {
+            return null;
+        }
+
+        try {
+            const parsed = JSON.parse(raw);
+            return parsed?.Version ?? null;
+        } catch {
+            return null;
+        }
+    }
+
+    const storedVersion = readStoredVersion();
+    if (storedVersion !== versie) {
         var updates = "- Voor een verbeterde dienstverlening loggen we nu je spelersnaam, spelersID en je versie van dit script"
 
-        localStorage.setItem('MissionReporter_version', JSON.stringify({ Version: versie }));
+        safeSetLocalStorageItem('MissionReporter_version', JSON.stringify({ Version: versie }));
 
         fetch('/api/credits')
             .then(response => response.json())
@@ -54,7 +86,7 @@
         const today = getLocalDateKey();
 
         try {
-            const raw = localStorage.getItem(STORAGE_KEY);
+            const raw = safeGetLocalStorageItem(STORAGE_KEY);
             if (!raw) {
                 return { date: today, ids: [] };
             }
@@ -71,7 +103,7 @@
     }
 
     function writeDailyMissionStore(store) {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(store));
+        safeSetLocalStorageItem(STORAGE_KEY, JSON.stringify(store));
     }
     
     const missionHelp = $('#mission_help');
