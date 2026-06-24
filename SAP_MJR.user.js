@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SAP_MJR
 // @namespace    http://tampermonkey.net/
-// @version      2025.07.15.1
+// @version      2026.06.24.01
 // @description  try to take over the world!
 // @author       Piet2001 & LSS-Manager
 // @match        https://www.meldkamerspel.com/*
@@ -47,7 +47,7 @@ var runPage = false;
         return runPage;
     }
 
-    var versie = "2025.07.15.1"
+    var versie = "2026.06.24.01"
     if (!localStorage.SAP_MJR_VERSION || JSON.parse(localStorage.SAP_MJR_VERSION).Version !== versie) {
         var updates = "Fix issue met additive overlays"
 
