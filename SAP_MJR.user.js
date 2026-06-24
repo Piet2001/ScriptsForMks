@@ -49,7 +49,7 @@ var runPage = false;
 
     var versie = "2026.06.24.01"
     if (!localStorage.SAP_MJR_VERSION || JSON.parse(localStorage.SAP_MJR_VERSION).Version !== versie) {
-        var updates = "Fix issue met additive overlays"
+        var updates = "Onderhoud uitgevoerd"
 
         alert(`SAP_MJR - Versie ${versie} nieuwe update! \n\n Updates:\n${updates}`)
 
