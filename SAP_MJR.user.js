@@ -96,6 +96,8 @@ var runPage = false;
 })();
 
 function RunScript() {
+    const MISSION_REPORTER_STORAGE_KEY = 'MissionReporter_sent_mission_ids_daily';
+    let missionReportTriggered = false;
 
     let alliance_credits = 5000;
     let ignore_min_credits_to_share = false;
@@ -111,6 +113,102 @@ function RunScript() {
     let planned_alliance_chat_credits_setting = false; // Alleen in chat plaatsen als boven ingesteld aantal credits. Deze instelling overschrijft de vorige instelling.
     let planned_alliance_chat_credits = 10000; // aantal credits wanneer geplande inzetten in de chat moet worden geplaatst
 
+    function safeGetLocalStorageItem(key) {
+        try {
+            return localStorage.getItem(key);
+        } catch {
+            return null;
+        }
+    }
+
+    function safeSetLocalStorageItem(key, value) {
+        try {
+            localStorage.setItem(key, value);
+            return true;
+        } catch {
+            return false;
+        }
+    }
+
+    function getLocalDateKey() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }
+
+    function readDailyMissionStore() {
+        const today = getLocalDateKey();
+
+        try {
+            const raw = safeGetLocalStorageItem(MISSION_REPORTER_STORAGE_KEY);
+            if (!raw) {
+                return { date: today, ids: [] };
+            }
+
+            const parsed = JSON.parse(raw);
+            if (!parsed || parsed.date !== today || !Array.isArray(parsed.ids)) {
+                return { date: today, ids: [] };
+            }
+
+            return parsed;
+        } catch {
+            return { date: today, ids: [] };
+        }
+    }
+
+    function writeDailyMissionStore(store) {
+        safeSetLocalStorageItem(MISSION_REPORTER_STORAGE_KEY, JSON.stringify(store));
+    }
+
+    function getMissionReporterMissionId() {
+        const missionHelp = $('#mission_help');
+        const missionLink = missionHelp.attr('href');
+        if (!missionHelp.length || !missionLink) {
+            return null;
+        }
+
+        let missionID = $('#mission_general_info').attr('data-mission-type');
+        const overlay = $('#mission_general_info').attr('data-overlay-index') ?? null;
+        const additive = $('#mission_general_info').attr('data-additive-overlays') ?? null;
+        if (!missionID) {
+            return null;
+        }
+        if (overlay !== null) {
+            missionID = `${missionID}-${overlay}`;
+        }
+        if (additive !== null) {
+            missionID = `${missionID}/${additive}`;
+        }
+
+        return missionID;
+    }
+
+    async function reportMissionIfNeeded(missionID) {
+        if (!missionID) {
+            return;
+        }
+
+        const store = readDailyMissionStore();
+        if (store.ids.includes(missionID)) {
+            return;
+        }
+
+        await fetch("https://piet2001-mks.hf.space/missions/log", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                mission: missionID,
+            }),
+        });
+
+        store.ids.push(missionID);
+        writeDailyMissionStore(store);
+    }
+
     const getFillTime = () => {
         let time = new Date();
         let hours = time.getHours() + minOpenTime;
@@ -124,17 +222,11 @@ function RunScript() {
 
     const getSluitvoertuig = () => {
         try {
-            const missionHelp = $('#mission_help');
-            const missionlink = missionHelp.attr('href');
-            if (missionHelp && missionlink) {
-                let missionID = $('#mission_general_info').attr('data-mission-type');
-                const overlay = $('#mission_general_info').attr('data-overlay-index') ?? null;
-                const additive = $('#mission_general_info').attr('data-additive-overlays') ?? null;
-                if (overlay !== null) {
-                    missionID = `${missionID}-${overlay}`
-                }
-                if (additive !== null) {
-                    missionID = `${missionID}/${additive}`
+            const missionID = getMissionReporterMissionId();
+            if (missionID) {
+                if (!missionReportTriggered) {
+                    missionReportTriggered = true;
+                    void reportMissionIfNeeded(missionID);
                 }
 
                 let mission = requirements[missionID];
