@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Fix URL Spaces
 // @namespace    http://tampermonkey.net/
-// @version      2026.07.03
+// @version      2026.07.03.01
 // @description  Remove accidental spaces from meldkamerspel URL paths.
 // @author       Piet2001
 // @match        https://www.meldkamerspel.com/*
