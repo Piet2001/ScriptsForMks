@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SAP_MJR
 // @namespace    http://tampermonkey.net/
-// @version      2026.06.24.02
+// @version      2026.07.23.02
 // @description  try to take over the world!
 // @author       Piet2001 & LSS-Manager
 // @match        https://www.meldkamerspel.com/*
@@ -140,7 +140,7 @@ var runPage = false;
     return runPage;
   }
 
-  var versie = "2026.06.24.02";
+  var versie = "2026.07.23.02";
   const versionState = getParsedLocalStorageItem("SAP_MJR_VERSION", {});
   if (versionState.Version !== versie) {
     var updates =

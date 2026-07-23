@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         resendShareMessageMJR
 // @namespace    http://tampermonkey.net/
-// @version      2026.07.03.02
+// @version      2026.07.23.01
 // @description  try to take over the world!
 // @author       Piet2001 & LSS-Manager
 // @match        https://www.meldkamerspel.com/*
@@ -105,7 +105,7 @@ var runPage = false;
     return runPage;
   }
 
-  var versie = "2026.07.03.02";
+  var versie = "2026.07.23.01";
   const versionState = getParsedLocalStorageItem(
     "resendShareMessageMJR_VERSION",
     {},
