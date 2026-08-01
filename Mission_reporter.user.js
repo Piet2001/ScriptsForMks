@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Mission Reporter
 // @namespace    http://tampermonkey.net/
-// @version      2026.06.22
+// @version      2026.08.01.01
 // @description  try to take over the world!
 // @author       Piet2001 & LSS-Manager
 // @match        https://www.meldkamerspel.com/missions/*
@@ -12,7 +12,7 @@
 (async function () {
     'use strict';
 
-    var versie = "2026.06.22"
+    var versie = "2026.08.01.01"
     function safeGetLocalStorageItem(key) {
         try {
             return localStorage.getItem(key);
