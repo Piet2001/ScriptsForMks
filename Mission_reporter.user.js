@@ -46,8 +46,6 @@
 
     const storedVersion = readStoredVersion();
     if (storedVersion !== versie) {
-        var updates = "- Voor een verbeterde dienstverlening loggen we nu je spelersnaam, spelersID en je versie van dit script"
-
         safeSetLocalStorageItem('MissionReporter_version', JSON.stringify({ Version: versie }));
 
         fetch('/api/credits')
